@@ -12,10 +12,8 @@ def initialize_model(model_id="openai/clip-vit-base-patch32"):
     return processor, model
 
 
-processor, model = initialize_model()
-
-
 def encode_images(image_batch):
+    processor, model = initialize_model()
     images = processor(
         text=None,
         images=image_batch,

@@ -14,6 +14,7 @@ class MyHandler(FileSystemEventHandler):
             image = Image.open(event.src_path)
             image_array = np.array(image)
             image_emb = encode_images(image_array)
+            print('Lowest embeding value: ', image_emb.min(), 'Heighest embeding value: ', image_emb.max())
 
 
 
