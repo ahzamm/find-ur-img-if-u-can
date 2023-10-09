@@ -1,14 +1,20 @@
-from watchdog.observers import Observer
-from watchdog.events import FileSystemEventHandler
 import time
+
+import numpy as np
+from PIL import Image
+from watchdog.events import FileSystemEventHandler
+from watchdog.observers import Observer
+
+from clip import encode_images
 
 
 class MyHandler(FileSystemEventHandler):
     def on_created(self, event):
-        if event.is_directory:
-            return
-        elif event.event_type == 'created':
-            print("Hello, world!")
+        if event.event_type == 'created':
+            image = Image.open(event.src_path)
+            image_array = np.array(image)
+            image_emb = encode_images(image_array)
+
 
 
 if __name__ == "__main__":

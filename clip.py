@@ -22,12 +22,12 @@ def encode_images(image_batch):
         return_tensors='pt'
     )['pixel_values'].to(device)
 
-    img_emb = model.get_image_features(images)
-    img_emb = img_emb.detach().cpu().numpy()
-    img_emb = img_emb.T / np.linalg.norm(img_emb, axis=1)
-    img_emb = img_emb.T
-    return img_emb
-    
+    image_emb = model.get_image_features(images)
+    image_emb = image_emb.detach().cpu().numpy()
+    image_emb = image_emb.T / np.linalg.norm(image_emb, axis=1)
+    image_emb = image_emb.T
+    return image_emb
+
 
 if __name__ == '__main__':
     ...
