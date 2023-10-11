@@ -1,4 +1,4 @@
-CLIP.ipynb
+*.ipynb
 images/
 .venv/
 __pycache__
