@@ -2,10 +2,18 @@ import time
 
 import numpy as np
 from PIL import Image
+from pymilvus import connections, utility
 from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
 
 from clip import encode_images
+
+connections.connect(alias="default", host='localhost', port='19530')
+
+try:
+    print(utility.get_server_version())
+except Exception as e:
+    print("Failed to connect to Milvus server:", e)
 
 
 class MyHandler(FileSystemEventHandler):
@@ -34,3 +42,6 @@ if __name__ == "__main__":
         observer.stop()
 
     observer.join()
+
+
+connections.disconnect()
