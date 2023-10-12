@@ -2,13 +2,29 @@ import time
 
 import numpy as np
 from PIL import Image
-from pymilvus import connections, utility
+from pymilvus import (Collection, CollectionSchema, DataType, FieldSchema,
+                      connections, utility)
 from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
 
 from clip import encode_images
 
 connections.connect(alias="default", host='localhost', port='19530')
+
+
+fields = [
+    FieldSchema(name="pk", dtype=DataType.INT64, is_primary=True, auto_id=False),
+    FieldSchema(name="image_embeddings", dtype=DataType.FLOAT_VECTOR, dim=512)
+]
+schema = CollectionSchema(fields, "Store the image embds for image search engine")
+
+
+collection_name = "image_embeddings"
+if not utility.has_collection(collection_name):
+    milvus_connection = Collection(collection_name, schema)
+else:
+    milvus_connection = Collection(collection_name)
+
 
 try:
     print(utility.get_server_version())
