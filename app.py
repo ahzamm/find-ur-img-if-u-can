@@ -9,28 +9,26 @@ from watchdog.observers import Observer
 
 from clip import encode_images
 
+
+
 connections.connect(alias="default", host='localhost', port='19530')
+print("Connected to milvus server...")
 
 
-fields = [
-    FieldSchema(name="pk", dtype=DataType.INT64, is_primary=True, auto_id=False),
-    FieldSchema(name="image_embeddings", dtype=DataType.FLOAT_VECTOR, dim=512)
-]
-schema = CollectionSchema(fields, "Store the image embds for image search engine")
+
+fields = [FieldSchema(name="pk", dtype=DataType.INT64, is_primary=True, auto_id=False),
+          FieldSchema(name="image_embeddings", dtype=DataType.FLOAT_VECTOR, dim=512)]
+schema = CollectionSchema(fields, enable_dynamic_field=True)
+
 
 
 collection_name = "image_embeddings"
-if not utility.has_collection(collection_name):
-    milvus_connection = Collection(collection_name, schema)
-else:
-    milvus_connection = Collection(collection_name)
+milvus_connection = Collection(collection_name, schema) if not utility.has_collection(collection_name) else Collection(collection_name)
 
 
-try:
-    print(utility.get_server_version())
-except Exception as e:
-    print("Failed to connect to Milvus server:", e)
 
+index = {"index_type": "IVF_FLAT", "metric_type": "L2", "params":{"nlist":128}}
+milvus_connection.create_index("image_embeddings", index)
 
 class MyHandler(FileSystemEventHandler):
     def on_created(self, event):
@@ -38,8 +36,10 @@ class MyHandler(FileSystemEventHandler):
             image = Image.open(event.src_path)
             image_array = np.array(image)
             image_emb = encode_images(image_array)
-            print('Lowest embeding value: ', image_emb.min(), 'Heighest embeding value: ', image_emb.max())
-
+            image_emb = image_emb.flatten().astype(float)
+            data = [[image_emb]]
+            milvus_connection.insert(data)
+            milvus_connection.flush()
 
 
 if __name__ == "__main__":

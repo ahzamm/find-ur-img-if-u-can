@@ -28,7 +28,7 @@ services:
       - "9001:9001"
       - "9000:9000"
     volumes:
-      - ./volumes/minio:/minio_data
+      - minio_storage:/minio_data
     command: minio server /minio_data --console-address ":9001"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
@@ -76,3 +76,6 @@ services:
 networks:
   default:
     name: milvus
+
+volumes:
+  minio_storage: {}
