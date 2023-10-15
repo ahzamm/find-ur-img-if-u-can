@@ -40,6 +40,8 @@ class MyHandler(FileSystemEventHandler):
             data = [[image_emb]]
             milvus_connection.insert(data)
             milvus_connection.flush()
+            milvus_connection.load()
+            
 
 
 if __name__ == "__main__":
