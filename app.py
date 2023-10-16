@@ -1,3 +1,4 @@
+import os
 import time
 
 import numpy as np
@@ -8,8 +9,6 @@ from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
 
 from clip import encode_images
-
-
 
 connections.connect(alias="default", host='localhost', port='19530')
 print("Connected to milvus server...")
@@ -38,9 +37,19 @@ class MyHandler(FileSystemEventHandler):
             image_emb = encode_images(image_array)
             image_emb = image_emb.flatten().astype(float)
             data = [[image_emb]]
-            milvus_connection.insert(data)
+            result = milvus_connection.insert(data)
+            primary_key = result.primary_keys[0]
             milvus_connection.flush()
             milvus_connection.load()
+            print("Embd stored in database successfully...")
+
+            original_path = event.src_path
+            folder_path, file_name = os.path.split(original_path)
+            new_file_name = f"{primary_key}.png"
+            new_path = os.path.join(folder_path, new_file_name)
+
+            os.rename(original_path, new_path)
+            print("Image successfully renamed to its pk")
             
 
 
