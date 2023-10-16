@@ -10,52 +10,83 @@ from watchdog.observers import Observer
 
 from clip import encode_images
 
-connections.connect(alias="default", host='localhost', port='19530')
-print("Connected to milvus server...")
+class MilvusConnection:
+    def __init__(self, collection_name):
+        self.collection_name = collection_name
+        self.connect()
+        self.create_schema()
+        self.create_collection()
+        self.create_index()
+
+    def connect(self):
+        connections.connect(alias="default", host='localhost', port='19530')
+        print("Connected to milvus server...")
+
+    def create_schema(self):
+        fields = [FieldSchema(name="pk", dtype=DataType.INT64, is_primary=True, auto_id=False),
+                  FieldSchema(name="image_embeddings", dtype=DataType.FLOAT_VECTOR, dim=512)]
+        self.schema = CollectionSchema(fields, enable_dynamic_field=True)
+
+    def create_collection(self):
+        if not utility.has_collection(self.collection_name):
+            self.collection = Collection(self.collection_name, self.schema)
+        else:
+            self.collection = Collection(self.collection_name)
+
+    def create_index(self):
+        index = {"index_type": "IVF_FLAT", "metric_type": "L2", "params":{"nlist":128}}
+        self.collection.create_index("image_embeddings", index)
+
+    def insert_image_embedding(self, image_emb):
+        data = [[image_emb]]
+        result = self.collection.insert(data)
+        primary_key = result.primary_keys[0]
+        self.collection.flush()
+        self.collection.load()
+        return primary_key
+
+    def disconnect(self):
+        connections.disconnect()
 
 
 
-fields = [FieldSchema(name="pk", dtype=DataType.INT64, is_primary=True, auto_id=False),
-          FieldSchema(name="image_embeddings", dtype=DataType.FLOAT_VECTOR, dim=512)]
-schema = CollectionSchema(fields, enable_dynamic_field=True)
+class ImageHandler:
+    def encode_image(self, image_path):
+        image = Image.open(image_path)
+        image_array = np.array(image)
+        image_emb = encode_images(image_array)
+        return image_emb.flatten().astype(float)
+
+    def rename_image(self, original_path, primary_key):
+        folder_path, file_name = os.path.split(original_path)
+        new_file_name = f"{primary_key}.png"
+        new_path = os.path.join(folder_path, new_file_name)
+        os.rename(original_path, new_path)
 
 
 
-collection_name = "image_embeddings"
-milvus_connection = Collection(collection_name, schema) if not utility.has_collection(collection_name) else Collection(collection_name)
+class EventHandler(FileSystemEventHandler):
+    def __init__(self, milvus_connection, image_handler):
+        self.milvus_connection = milvus_connection
+        self.image_handler = image_handler
 
-
-
-index = {"index_type": "IVF_FLAT", "metric_type": "L2", "params":{"nlist":128}}
-milvus_connection.create_index("image_embeddings", index)
-
-class MyHandler(FileSystemEventHandler):
     def on_created(self, event):
         if event.event_type == 'created':
-            image = Image.open(event.src_path)
-            image_array = np.array(image)
-            image_emb = encode_images(image_array)
-            image_emb = image_emb.flatten().astype(float)
-            data = [[image_emb]]
-            result = milvus_connection.insert(data)
-            primary_key = result.primary_keys[0]
-            milvus_connection.flush()
-            milvus_connection.load()
+            image_emb = self.image_handler.encode_image(event.src_path)
+            primary_key = self.milvus_connection.insert_image_embedding(image_emb)
             print("Embd stored in database successfully...")
 
-            original_path = event.src_path
-            folder_path, file_name = os.path.split(original_path)
-            new_file_name = f"{primary_key}.png"
-            new_path = os.path.join(folder_path, new_file_name)
-
-            os.rename(original_path, new_path)
+            self.image_handler.rename_image(event.src_path, primary_key)
             print("Image successfully renamed to its pk")
-            
+
 
 
 if __name__ == "__main__":
     path = "./images"
-    event_handler = MyHandler()
+
+    milvus_connection = MilvusConnection("image_embeddings")
+    image_handler = ImageHandler()
+    event_handler = EventHandler(milvus_connection, image_handler)
     observer = Observer()
     observer.schedule(event_handler, path, recursive=True)
 
@@ -70,5 +101,4 @@ if __name__ == "__main__":
 
     observer.join()
 
-
-connections.disconnect()
+    milvus_connection.disconnect()
