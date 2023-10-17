@@ -1,5 +1,6 @@
 import os
 import time
+import uuid
 
 import numpy as np
 from PIL import Image
@@ -10,9 +11,11 @@ from watchdog.observers import Observer
 
 from clip import encode_images
 
+
 class MilvusConnection:
     def __init__(self, collection_name):
         self.collection_name = collection_name
+        self.id = self.generate_id()
         self.connect()
         self.create_schema()
         self.create_collection()
@@ -23,7 +26,8 @@ class MilvusConnection:
         print("Connected to milvus server...")
 
     def create_schema(self):
-        fields = [FieldSchema(name="pk", dtype=DataType.INT64, is_primary=True, auto_id=False),
+        fields = [FieldSchema(name="pk", dtype=DataType.VARCHAR, max_length=8, is_primary=True),
+                  FieldSchema(name="image_name", dtype=DataType.VARCHAR, max_length=20),
                   FieldSchema(name="image_embeddings", dtype=DataType.FLOAT_VECTOR, dim=512)]
         self.schema = CollectionSchema(fields, enable_dynamic_field=True)
 
@@ -37,16 +41,19 @@ class MilvusConnection:
         index = {"index_type": "IVF_FLAT", "metric_type": "L2", "params":{"nlist":128}}
         self.collection.create_index("image_embeddings", index)
 
-    def insert_image_embedding(self, image_emb):
-        data = [[image_emb]]
-        result = self.collection.insert(data)
-        primary_key = result.primary_keys[0]
+    def insert_image_data(self, image_name, image_emb):
+        data = [[self.id], [image_name], [image_emb]]
+        self.collection.insert(data)
         self.collection.flush()
         self.collection.load()
-        return primary_key
 
     def disconnect(self):
-        connections.disconnect()
+        connections.disconnect(alias="default")
+
+    def generate_id(self, length=8):
+        uuid_str = str(uuid.uuid4()).replace("-", "")
+        short_id = uuid_str[:length]
+        return short_id
 
 
 
@@ -57,13 +64,6 @@ class ImageHandler:
         image_emb = encode_images(image_array)
         return image_emb.flatten().astype(float)
 
-    def rename_image(self, original_path, primary_key):
-        folder_path, file_name = os.path.split(original_path)
-        new_file_name = f"{primary_key}.png"
-        new_path = os.path.join(folder_path, new_file_name)
-        os.rename(original_path, new_path)
-
-
 
 class EventHandler(FileSystemEventHandler):
     def __init__(self, milvus_connection, image_handler):
@@ -72,12 +72,10 @@ class EventHandler(FileSystemEventHandler):
 
     def on_created(self, event):
         if event.event_type == 'created':
+            image_name = os.path.basename(event.src_path)
             image_emb = self.image_handler.encode_image(event.src_path)
-            primary_key = self.milvus_connection.insert_image_embedding(image_emb)
+            self.milvus_connection.insert_image_data(image_name, image_emb)
             print("Embd stored in database successfully...")
-
-            self.image_handler.rename_image(event.src_path, primary_key)
-            print("Image successfully renamed to its pk")
 
 
 
