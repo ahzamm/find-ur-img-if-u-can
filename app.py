@@ -15,7 +15,6 @@ from clip import encode_images
 class MilvusConnection:
     def __init__(self, collection_name):
         self.collection_name = collection_name
-        self.id = self.generate_id()
         self.connect()
         self.create_schema()
         self.create_collection()
@@ -42,7 +41,7 @@ class MilvusConnection:
         self.collection.create_index("image_embeddings", index)
 
     def insert_image_data(self, image_name, image_emb):
-        data = [[self.id], [image_name], [image_emb]]
+        data = [[self.generate_id()], [image_name], [image_emb]]
         self.collection.insert(data)
         self.collection.flush()
         self.collection.load()
@@ -58,24 +57,32 @@ class MilvusConnection:
 
 
 class ImageHandler:
-    def encode_image(self, image_path):
-        image = Image.open(image_path)
-        image_array = np.array(image)
+    def __init__(self, image_path):
+        self.image_path = image_path
+        self.image = Image.open(self.image_path)
+
+    def encode_image(self):
+        image_array = np.array(self.image)
         image_emb = encode_images(image_array)
         return image_emb.flatten().astype(float)
+    
+    def set_id_to_image_metadata(self, image_id):
+        metadata = self.image.info
+        metadata["image_id"] = image_id
+        self.image.save(self.image_path, **metadata)
+
 
 
 class EventHandler(FileSystemEventHandler):
-    def __init__(self, milvus_connection, image_handler):
+    def __init__(self, milvus_connection):
         self.milvus_connection = milvus_connection
-        self.image_handler = image_handler
 
     def on_created(self, event):
-        if event.event_type == 'created':
-            image_name = os.path.basename(event.src_path)
-            image_emb = self.image_handler.encode_image(event.src_path)
-            self.milvus_connection.insert_image_data(image_name, image_emb)
-            print("Embd stored in database successfully...")
+        image_handler = ImageHandler(event.src_path)
+        image_name = os.path.basename(event.src_path)
+        image_emb = image_handler.encode_image()
+        self.milvus_connection.insert_image_data(image_name, image_emb)
+        print("Embd stored in database successfully...")
 
 
 
@@ -83,8 +90,7 @@ if __name__ == "__main__":
     path = "./images"
 
     milvus_connection = MilvusConnection("image_embeddings")
-    image_handler = ImageHandler()
-    event_handler = EventHandler(milvus_connection, image_handler)
+    event_handler = EventHandler(milvus_connection)
     observer = Observer()
     observer.schedule(event_handler, path, recursive=True)
 
