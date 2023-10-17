@@ -1,5 +1,6 @@
 import os
 import time
+import uuid
 
 import numpy as np
 from PIL import Image
@@ -10,52 +11,96 @@ from watchdog.observers import Observer
 
 from clip import encode_images
 
-connections.connect(alias="default", host='localhost', port='19530')
-print("Connected to milvus server...")
+
+class MilvusConnection:
+    def __init__(self, collection_name):
+        self.collection_name = collection_name
+        self.connect()
+        self.create_schema()
+        self.create_collection()
+        self.create_index()
+
+    def connect(self):
+        connections.connect(alias="default", host='localhost', port='19530')
+        print("Connected to milvus server...")
+
+    def create_schema(self):
+        fields = [FieldSchema(name="pk", dtype=DataType.VARCHAR, max_length=8, is_primary=True),
+                  FieldSchema(name="image_name", dtype=DataType.VARCHAR, max_length=20),
+                  FieldSchema(name="image_embeddings", dtype=DataType.FLOAT_VECTOR, dim=512)]
+        self.schema = CollectionSchema(fields, enable_dynamic_field=True)
+
+    def create_collection(self):
+        if not utility.has_collection(self.collection_name):
+            self.collection = Collection(self.collection_name, self.schema)
+        else:
+            self.collection = Collection(self.collection_name)
+
+    def create_index(self):
+        index = {"index_type": "IVF_FLAT", "metric_type": "L2", "params":{"nlist":128}}
+        self.collection.create_index("image_embeddings", index)
+
+    def insert_image_data(self, image_name, image_emb):
+        data = [[self.generate_id()], [image_name], [image_emb]]
+        self.collection.insert(data)
+        self.collection.flush()
+        self.collection.load()
+
+    def delete_image_data(self, image_name):
+        expr = f"image_name == '{image_name}'"
+        results = self.collection.query(expr, output_fields=["pk"])
+        primary_keys = [hit["pk"] for hit in results]
+        expr = f"pk in {primary_keys}"
+        self.collection.delete(expr)
+        self.collection.load()
+
+    def disconnect(self):
+        connections.disconnect(alias="default")
+
+    def generate_id(self, length=8):
+        uuid_str = str(uuid.uuid4()).replace("-", "")
+        short_id = uuid_str[:length]
+        return short_id
 
 
 
-fields = [FieldSchema(name="pk", dtype=DataType.INT64, is_primary=True, auto_id=False),
-          FieldSchema(name="image_embeddings", dtype=DataType.FLOAT_VECTOR, dim=512)]
-schema = CollectionSchema(fields, enable_dynamic_field=True)
+class ImageHandler:
+    def __init__(self, image_path):
+        self.image_path = image_path
+        self.image = Image.open(self.image_path)
+
+    def encode_image(self):
+        image_array = np.array(self.image)
+        image_emb = encode_images(image_array)
+        return image_emb.flatten().astype(float)
 
 
 
-collection_name = "image_embeddings"
-milvus_connection = Collection(collection_name, schema) if not utility.has_collection(collection_name) else Collection(collection_name)
+class EventHandler(FileSystemEventHandler):
+    def __init__(self, milvus_connection):
+        self.milvus_connection = milvus_connection
 
-
-
-index = {"index_type": "IVF_FLAT", "metric_type": "L2", "params":{"nlist":128}}
-milvus_connection.create_index("image_embeddings", index)
-
-class MyHandler(FileSystemEventHandler):
     def on_created(self, event):
-        if event.event_type == 'created':
-            image = Image.open(event.src_path)
-            image_array = np.array(image)
-            image_emb = encode_images(image_array)
-            image_emb = image_emb.flatten().astype(float)
-            data = [[image_emb]]
-            result = milvus_connection.insert(data)
-            primary_key = result.primary_keys[0]
-            milvus_connection.flush()
-            milvus_connection.load()
-            print("Embd stored in database successfully...")
+        image_handler = ImageHandler(event.src_path)
+        image_name = os.path.basename(event.src_path)
+        image_emb = image_handler.encode_image()
+        self.milvus_connection.insert_image_data(image_name, image_emb)
+        print("Embd stored in database successfully...")
 
-            original_path = event.src_path
-            folder_path, file_name = os.path.split(original_path)
-            new_file_name = f"{primary_key}.png"
-            new_path = os.path.join(folder_path, new_file_name)
+    def on_deleted(self, event):
+        image_name = os.path.basename(event.src_path)
+        self.milvus_connection.delete_image_data(image_name)
+        print("Embd removed from database successfully...")
 
-            os.rename(original_path, new_path)
-            print("Image successfully renamed to its pk")
-            
+        
+
 
 
 if __name__ == "__main__":
     path = "./images"
-    event_handler = MyHandler()
+
+    milvus_connection = MilvusConnection("image_embeddings")
+    event_handler = EventHandler(milvus_connection)
     observer = Observer()
     observer.schedule(event_handler, path, recursive=True)
 
@@ -70,5 +115,4 @@ if __name__ == "__main__":
 
     observer.join()
 
-
-connections.disconnect()
+    milvus_connection.disconnect()
