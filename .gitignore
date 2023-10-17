@@ -1,5 +1,5 @@
 *.ipynb
 images/
-.venv/
+.*/
 __pycache__
 volumes/
