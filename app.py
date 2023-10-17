@@ -46,6 +46,14 @@ class MilvusConnection:
         self.collection.flush()
         self.collection.load()
 
+    def delete_image_data(self, image_name):
+        expr = f"image_name == '{image_name}'"
+        results = self.collection.query(expr, output_fields=["pk"])
+        primary_keys = [hit["pk"] for hit in results]
+        expr = f"pk in {primary_keys}"
+        self.collection.delete(expr)
+        self.collection.load()
+
     def disconnect(self):
         connections.disconnect(alias="default")
 
@@ -65,11 +73,6 @@ class ImageHandler:
         image_array = np.array(self.image)
         image_emb = encode_images(image_array)
         return image_emb.flatten().astype(float)
-    
-    def set_id_to_image_metadata(self, image_id):
-        metadata = self.image.info
-        metadata["image_id"] = image_id
-        self.image.save(self.image_path, **metadata)
 
 
 
@@ -83,6 +86,13 @@ class EventHandler(FileSystemEventHandler):
         image_emb = image_handler.encode_image()
         self.milvus_connection.insert_image_data(image_name, image_emb)
         print("Embd stored in database successfully...")
+
+    def on_deleted(self, event):
+        image_name = os.path.basename(event.src_path)
+        self.milvus_connection.delete_image_data(image_name)
+        print("Embd removed from database successfully...")
+
+        
 
 
 
