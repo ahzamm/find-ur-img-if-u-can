@@ -37,10 +37,11 @@ class MyHandler(FileSystemEventHandler):
             image_array = np.array(image)
             image_emb = encode_images(image_array)
             image_emb = image_emb.flatten().astype(float)
-            data = [[image_emb]]
+            data = [{"pk": int(time.time() * 1000000), "image_embeddings": image_emb}]
             milvus_connection.insert(data)
             milvus_connection.flush()
             milvus_connection.load()
+            print("Embd stored in database successfully...")
             
 
 
