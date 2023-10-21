@@ -1,11 +1,23 @@
+import numpy as np
 from flask import Flask, request
+from PIL import Image
+
+from app import MilvusConnection
+from clip import encode_images
 
 app = Flask(__name__)
+
+milvus_connection = MilvusConnection("image_embeddings")
 
 @app.route('/photos', methods=['POST'])
 def upload_photos():
     file = request.files['image']
-    file.save('uploads/' + file.filename)
+    file_name = file.filename
+    image = Image.open(file)
+    image_array = np.array(image)
+    image_emb = encode_images(image_array)
+    image_emb = image_emb.flatten().astype(float)
+    milvus_connection.insert_image_data(file_name, image_emb)
     return 'File uploaded successfully!'
 
 if __name__ == '__main__':
