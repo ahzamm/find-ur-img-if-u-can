@@ -19,12 +19,11 @@ def upload_photos():
         image_emb = encode_images(image_array)
         image_emb = image_emb.flatten().astype(float)
         image_id = milvus_connection.insert_image_data(file_name, image_emb)
-        print("🚀  main.py:20 image_id :", image_id)
-        return 'File uploaded successfully!'
+        return image_id
     
     elif request.method == 'DELETE':
         image_id = request.args.get('image_id')
-        print("🚀  main.py:27 image_id :", image_id)
+        milvus_connection.delete_image_data(image_id)
         return 'File deleted successfully!'
 
 if __name__ == '__main__':

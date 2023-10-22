@@ -49,11 +49,8 @@ class MilvusConnection:
         return image_id
         
 
-    def delete_image_data(self, image_name):
-        expr = f"image_name == '{image_name}'"
-        results = self.collection.query(expr, output_fields=["pk"])
-        primary_keys = [hit["pk"] for hit in results]
-        expr = f"pk in {primary_keys}"
+    def delete_image_data(self, image_id):
+        expr = f"pk in {[image_id]}"
         self.collection.delete(expr)
         self.collection.load()
 
