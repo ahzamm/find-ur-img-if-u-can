@@ -42,9 +42,12 @@ class MilvusConnection:
 
     def insert_image_data(self, image_name, image_emb):
         data = [[self.generate_id()], [image_name], [image_emb]]
-        self.collection.insert(data)
+        result = self.collection.insert(data)
         self.collection.flush()
         self.collection.load()
+        image_id = result.primary_keys[0]
+        return image_id
+        
 
     def delete_image_data(self, image_name):
         expr = f"image_name == '{image_name}'"
