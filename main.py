@@ -23,7 +23,9 @@ def upload_photos():
         return 'File uploaded successfully!'
     
     elif request.method == 'DELETE':
-        ...
+        image_id = request.args.get('image_id')
+        print("🚀  main.py:27 image_id :", image_id)
+        return 'File deleted successfully!'
 
 if __name__ == '__main__':
     app.run(debug=True)
