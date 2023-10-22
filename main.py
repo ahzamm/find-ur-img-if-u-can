@@ -26,5 +26,15 @@ def upload_photos():
         milvus_connection.delete_image_data(image_id)
         return 'File deleted successfully!'
 
+
+@app.route('/query', methods=['GET'])
+def retrieve_photo():
+    data = request.get_json()
+    query = data.get('query')
+    print("🚀  main.py:33 query :", query)
+    return query
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
