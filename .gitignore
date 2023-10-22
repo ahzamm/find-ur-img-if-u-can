@@ -1,5 +1,4 @@
 *.ipynb
 images/
-.*/
 __pycache__
 volumes/
