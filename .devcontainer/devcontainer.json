@@ -1,7 +1,13 @@
 {
 	"name": "Python 3",
 	"image": "mcr.microsoft.com/devcontainers/python:1-3.11-bullseye",
-	
+	"postCreateCommand": [
+		"pip install venv",
+		"python -m venv .venv",
+		"source ./.venv/bin/activate",
+		"pip install -r requirements.txt",
+		"sudo chown -R vscode:vscode ."
+	],
 	
   "customizations": {
     "vscode": {
