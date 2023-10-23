@@ -6,9 +6,7 @@ COPY ./requirements.txt /app
 
 RUN python -m venv .venv && \
     source .venv/bin/activate && \
-    pip install --no-cache-dir --upgrade -r requirements.txt && \
-    apk update && \
-    apk add git
+    pip install --no-cache-dir --upgrade -r requirements.txt
 
 COPY . /app
 
