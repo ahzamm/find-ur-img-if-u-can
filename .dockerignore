@@ -1,5 +1,3 @@
-.git/
-.devcontainer/
 __pycache__/
 *.pyc
 images/
@@ -7,3 +5,4 @@ volumes/
 CLIP.ipynb
 docker-compose.yml
 .venv/
+.*/
