@@ -72,19 +72,6 @@ services:
       retries: 3
     depends_on:
       - "standalone"
-  
-  image-finder:
-    image: flaks-backend-img
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: flask-backend-cont
-    depends_on:
-      - standalone
-    ports:
-      - "5000:5000"
-    volumes:
-      - .:/app
 
 networks:
   default:
