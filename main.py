@@ -3,7 +3,7 @@ from flask import Flask, request
 from PIL import Image
 
 from app import MilvusConnection
-from clip import encode_images
+from clip import encode_images, encode_text
 
 app = Flask(__name__)
 
@@ -32,7 +32,10 @@ def retrieve_photo():
     data = request.get_json()
     query = data.get('query')
     print("🚀  main.py:33 query :", query)
-    return query
+    query_embd = encode_text(query)
+    print("🚀  main.py:35 query_embd :", query_embd)
+    
+    return query_embd.tolist()
 
 
 
