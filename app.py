@@ -1,15 +1,8 @@
-import os
-import time
+
 import uuid
 
-import numpy as np
-from PIL import Image
 from pymilvus import (Collection, CollectionSchema, DataType, FieldSchema,
                       connections, utility)
-from watchdog.events import FileSystemEventHandler
-from watchdog.observers import Observer
-
-from clip import encode_images
 
 
 class MilvusConnection:
@@ -67,58 +60,3 @@ class MilvusConnection:
         query_embd = query_embd.astype(float)
         results = self.collection.search(query_embd, "image_embeddings", search_params, top_k)
         return results
-
-
-
-class ImageHandler:
-    def __init__(self, image_path):
-        self.image_path = image_path
-        self.image = Image.open(self.image_path)
-
-    def encode_image(self):
-        image_array = np.array(self.image)
-        image_emb = encode_images(image_array)
-        return image_emb.flatten().astype(float)
-
-
-
-class EventHandler(FileSystemEventHandler):
-    def __init__(self, milvus_connection):
-        self.milvus_connection = milvus_connection
-
-    def on_created(self, event):
-        image_handler = ImageHandler(event.src_path)
-        image_name = os.path.basename(event.src_path)
-        image_emb = image_handler.encode_image()
-        self.milvus_connection.insert_image_data(image_name, image_emb)
-        print("Embd stored in database successfully...")
-
-    def on_deleted(self, event):
-        image_name = os.path.basename(event.src_path)
-        self.milvus_connection.delete_image_data(image_name)
-        print("Embd removed from database successfully...")
-
-        
-
-
-
-if __name__ == "__main__":
-    path = "./images"
-
-    milvus_connection = MilvusConnection("image_embeddings")
-    event_handler = EventHandler(milvus_connection)
-    observer = Observer()
-    observer.schedule(event_handler, path, recursive=True)
-
-    print("Watching for changes in the 'images' folder...")
-
-    try:
-        observer.start()
-        while True:
-            time.sleep(1)
-    except KeyboardInterrupt:
-        observer.stop()
-
-    observer.join()
-
-    milvus_connection.disconnect()
