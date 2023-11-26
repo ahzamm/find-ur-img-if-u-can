@@ -61,6 +61,12 @@ class MilvusConnection:
         uuid_str = str(uuid.uuid4()).replace("-", "")
         short_id = uuid_str[:length]
         return short_id
+    
+    def search(self, query_embd, top_k=2):
+        search_params = {"metric_type": "L2", "params": {"nprobe": 1}}
+        query_embd = query_embd.astype(float)
+        results = self.collection.search(query_embd, "image_embeddings", search_params, top_k)
+        return results
 
 
 

@@ -3,7 +3,6 @@ import torch
 from transformers import CLIPModel, CLIPProcessor
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
-print("🚀  clip.py:5 device :", device)
 
 
 def initialize_model(model_id="openai/clip-vit-base-patch32"):

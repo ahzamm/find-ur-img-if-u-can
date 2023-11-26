@@ -27,15 +27,23 @@ def upload_photos():
         return 'File deleted successfully!'
 
 
+def extract_ids(hits):
+    ids = []
+    for hit in hits[0]:
+        ids.append(hit.id)
+    return ids
+
+
 @app.route('/query', methods=['GET'])
 def retrieve_photo():
     data = request.get_json()
     query = data.get('query')
-    print("🚀  main.py:33 query :", query)
     query_embd = encode_text(query)
-    print("🚀  main.py:35 query_embd :", query_embd)
+
+    result = milvus_connection.search(query_embd)
+    ids = extract_ids(result)
     
-    return query_embd.tolist()
+    return ids
 
 
 
