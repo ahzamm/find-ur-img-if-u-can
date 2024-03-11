@@ -9,3 +9,15 @@ INFO:werkzeug:127.0.0.1 - - [12/Mar/2024 00:08:36] "DELETE /photos?image_id=40eb
 INFO:werkzeug:127.0.0.1 - - [12/Mar/2024 00:08:46] "GET /query HTTP/1.1" 200 -
 ERROR:root:2024-03-12 00:08:59 - An error occurred: cannot identify image file <FileStorage: '' (None)>
 INFO:werkzeug:127.0.0.1 - - [12/Mar/2024 00:08:59] "[35m[1mPOST /photos HTTP/1.1[0m" 500 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 138-862-705
+ERROR:root:2024-03-12 00:14:35 - An error occurred: cannot identify image file <FileStorage: '' (None)>
+INFO:werkzeug:127.0.0.1 - - [12/Mar/2024 00:14:35] "[35m[1mPOST /photos HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [12/Mar/2024 00:14:55] "POST /photos HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Mar/2024 00:15:07] "DELETE /photos?image_id=9acba375 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Mar/2024 00:15:21] "GET /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Mar/2024 00:15:33] "GET /query HTTP/1.1" 200 -

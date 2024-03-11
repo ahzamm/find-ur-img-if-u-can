@@ -1,62 +1,74 @@
+import logging
+from datetime import datetime
 
-import uuid
+import numpy as np
+from flask import Flask, request
+from PIL import Image
 
-from pymilvus import (Collection, CollectionSchema, DataType, FieldSchema,
-                      connections, utility)
+from milvus import MilvusConnection
+from clip import encode_images, encode_text
 
 
-class MilvusConnection:
-    def __init__(self, collection_name):
-        self.collection_name = collection_name
-        self.connect()
-        self.create_schema()
-        self.create_collection()
-        self.create_index()
+app = Flask(__name__)
 
-    def connect(self):
-        connections.connect(alias="default", host='localhost', port='19530')
-        print("Connected to milvus server...")
+logging.basicConfig(filename="logs/app.log", level=logging.ERROR)
 
-    def create_schema(self):
-        fields = [FieldSchema(name="pk", dtype=DataType.VARCHAR, max_length=8, is_primary=True),
-                  FieldSchema(name="image_name", dtype=DataType.VARCHAR, max_length=20),
-                  FieldSchema(name="image_embeddings", dtype=DataType.FLOAT_VECTOR, dim=512)]
-        self.schema = CollectionSchema(fields, enable_dynamic_field=True)
+milvus_connection = MilvusConnection("image_embeddings")
 
-    def create_collection(self):
-        if not utility.has_collection(self.collection_name):
-            self.collection = Collection(self.collection_name, self.schema)
-        else:
-            self.collection = Collection(self.collection_name)
 
-    def create_index(self):
-        index = {"index_type": "IVF_FLAT", "metric_type": "L2", "params":{"nlist":128}}
-        self.collection.create_index("image_embeddings", index)
+def log_error(exception):
+    current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    error_message = f"{current_time} - An error occurred: {exception}"
+    logging.error(error_message)
+    print(error_message)
 
-    def insert_image_data(self, image_name, image_emb):
-        data = [[self.generate_id()], [image_name], [image_emb]]
-        result = self.collection.insert(data)
-        self.collection.flush()
-        self.collection.load()
-        image_id = result.primary_keys[0]
-        return image_id
-        
 
-    def delete_image_data(self, image_id):
-        expr = f"pk in {[image_id]}"
-        self.collection.delete(expr)
-        self.collection.load()
+@app.route("/photos", methods=["POST", "DELETE"])
+def upload_photos():
+    try:
+        if request.method == "POST":
+            file = request.files["image"]
+            file_name = file.filename
+            image = Image.open(file)
+            image_array = np.array(image)
+            image_emb = encode_images(image_array)
+            image_emb = image_emb.flatten().astype(float)
+            image_id = milvus_connection.insert_image_data(file_name, image_emb)
+            return {"success": "true", "image_id": image_id}
 
-    def disconnect(self):
-        connections.disconnect(alias="default")
+        elif request.method == "DELETE":
+            image_id = request.args.get("image_id")
+            milvus_connection.delete_image_data(image_id)
+            return {"success": "true", "message": "File deleted successfully!"}
 
-    def generate_id(self, length=8):
-        uuid_str = str(uuid.uuid4()).replace("-", "")
-        short_id = uuid_str[:length]
-        return short_id
-    
-    def search(self, query_embd, top_k=2):
-        search_params = {"metric_type": "L2", "params": {"nprobe": 1}}
-        query_embd = query_embd.astype(float)
-        results = self.collection.search(query_embd, "image_embeddings", search_params, top_k)
-        return results
+    except Exception as e:
+        log_error(e)
+        return {"success": "false", "error": str(e)}, 500
+
+
+def extract_ids(hits):
+    ids = []
+    for hit in hits[0]:
+        ids.append(hit.id)
+    return ids
+
+
+@app.route("/query", methods=["GET"])
+def retrieve_photo():
+    try:
+        data = request.get_json()
+        query = data.get("query")
+        query_embd = encode_text(query)
+
+        result = milvus_connection.search(query_embd)
+        ids = extract_ids(result)
+
+        return {"success": "true", "image_ids": ids}
+
+    except Exception as e:
+        log_error(e)
+        return {"success": "false", "error": str(e)}, 500
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
