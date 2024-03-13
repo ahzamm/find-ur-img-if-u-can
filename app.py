@@ -34,7 +34,9 @@ def upload_photos():
             image_array = np.array(image)
             image_emb = encode_images(image_array)
             image_emb = image_emb.flatten().astype(float)
-            image_id = milvus_connection.insert_image_data(user_id, file_name, image_emb)
+            image_id = milvus_connection.insert_image_data(
+                user_id, file_name, image_emb
+            )
             return {"success": "true", "image_id": image_id}
 
         elif request.method == "DELETE":
@@ -79,6 +81,7 @@ def delete_schema():
     except Exception as e:
         log_error(e)
         return {"success": "false", "message": str(e)}, 500
+
 
 if __name__ == "__main__":
     app.run(debug=True)

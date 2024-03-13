@@ -2,7 +2,7 @@ import numpy as np
 import torch
 from transformers import CLIPModel, CLIPProcessor
 
-device = 'cuda' if torch.cuda.is_available() else 'cpu'
+device = "cuda" if torch.cuda.is_available() else "cpu"
 
 
 def initialize_model(model_id="openai/clip-vit-base-patch32"):
@@ -14,11 +14,9 @@ def initialize_model(model_id="openai/clip-vit-base-patch32"):
 
 def encode_images(image_batch):
     processor, model = initialize_model()
-    images = processor(
-        text=None,
-        images=image_batch,
-        return_tensors='pt'
-    )['pixel_values'].to(device)
+    images = processor(text=None, images=image_batch, return_tensors="pt")[
+        "pixel_values"
+    ].to(device)
 
     image_emb = model.get_image_features(images)
     image_emb = image_emb.detach().cpu().numpy()
@@ -31,10 +29,7 @@ def encode_text(text_query):
     processor, model = initialize_model()
 
     tokens = processor(
-        text=text_query,
-        padding=True,
-        images=None,
-        return_tensors='pt'
+        text=text_query, padding=True, images=None, return_tensors="pt"
     ).to(device)
 
     text_emb = model.get_text_features(**tokens)
@@ -42,8 +37,9 @@ def encode_text(text_query):
 
     norm_factor = np.linalg.norm(text_emb, axis=1)
     text_emb = text_emb.T / norm_factor
-    
+
     return text_emb.T
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     ...

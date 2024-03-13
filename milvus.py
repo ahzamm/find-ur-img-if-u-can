@@ -23,7 +23,10 @@ class MilvusConnection:
         print("Connected to milvus server...")
 
     def create_schema(self):
-        fields = [FieldSchema(name="pk", dtype=DataType.VARCHAR, max_length=8, is_primary=True),
+        fields = [
+            FieldSchema(
+                name="pk", dtype=DataType.VARCHAR, max_length=8, is_primary=True
+            ),
             FieldSchema(name="user_id", dtype=DataType.VARCHAR, max_length=8),
             FieldSchema(name="image_name", dtype=DataType.VARCHAR, max_length=20),
             FieldSchema(name="image_embeddings", dtype=DataType.FLOAT_VECTOR, dim=512),
