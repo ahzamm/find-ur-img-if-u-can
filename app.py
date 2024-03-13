@@ -61,9 +61,10 @@ def retrieve_photo():
     try:
         data = request.get_json()
         query = data.get("query")
+        user_id = data.get("user_id")
         query_embd = encode_text(query)
 
-        result = milvus_connection.search(query_embd)
+        result = milvus_connection.search(user_id, query_embd)
         ids = extract_ids(result)
 
         return {"success": "true", "image_ids": ids}
