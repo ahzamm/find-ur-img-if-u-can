@@ -27,13 +27,14 @@ def log_error(exception):
 def upload_photos():
     try:
         if request.method == "POST":
+            user_id = request.form["user_id"]
             file = request.files["image"]
             file_name = file.filename
             image = Image.open(file)
             image_array = np.array(image)
             image_emb = encode_images(image_array)
             image_emb = image_emb.flatten().astype(float)
-            image_id = milvus_connection.insert_image_data(file_name, image_emb)
+            image_id = milvus_connection.insert_image_data(user_id, file_name, image_emb)
             return {"success": "true", "image_id": image_id}
 
         elif request.method == "DELETE":
@@ -69,6 +70,15 @@ def retrieve_photo():
         log_error(e)
         return {"success": "false", "error": str(e)}, 500
 
+
+@app.route("/delete-schema", methods=["DELETE"])
+def delete_schema():
+    try:
+        milvus_connection.delete_schema()
+        return {"success": "true", "message": "Schema deleted successfully"}
+    except Exception as e:
+        log_error(e)
+        return {"success": "false", "message": str(e)}, 500
 
 if __name__ == "__main__":
     app.run(debug=True)
