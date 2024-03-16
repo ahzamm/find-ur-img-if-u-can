@@ -77,3 +77,79 @@ WARNING:werkzeug: * Debugger is active!
 INFO:werkzeug: * Debugger PIN: 101-724-121
 INFO:werkzeug:127.0.0.1 - - [16/Mar/2024 00:42:38] "POST /photos HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [16/Mar/2024 00:50:01] "POST /photos HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5001
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 102-570-522
+ERROR:pymilvus.decorators:RPC error: [batch_insert], <ParamError: (code=1, message=invalid input, length of string exceeds max length. length: 24, max length: 20)>, <Time:{'RPC start': '2024-03-16 21:48:31.375094', 'RPC error': '2024-03-16 21:48:31.376496'}>
+ERROR:root:2024-03-16 21:48:31 - An error occurred: <ParamError: (code=1, message=invalid input, length of string exceeds max length. length: 24, max length: 20)>
+INFO:werkzeug:127.0.0.1 - - [16/Mar/2024 21:48:31] "[35m[1mPOST /photos HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [16/Mar/2024 21:48:51] "POST /photos HTTP/1.1" 200 -
+ERROR:pymilvus.decorators:RPC error: [batch_insert], <ParamError: (code=1, message=invalid input, length of string exceeds max length. length: 24, max length: 20)>, <Time:{'RPC start': '2024-03-16 21:49:09.141821', 'RPC error': '2024-03-16 21:49:09.141940'}>
+ERROR:root:2024-03-16 21:49:09 - An error occurred: <ParamError: (code=1, message=invalid input, length of string exceeds max length. length: 24, max length: 20)>
+INFO:werkzeug:127.0.0.1 - - [16/Mar/2024 21:49:09] "[35m[1mPOST /photos HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [16/Mar/2024 21:49:26] "POST /photos HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Mar/2024 21:50:22] "POST /photos HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Mar/2024 22:16:35] "[31m[1mGET /photos HTTP/1.1[0m" 405 -
+INFO:werkzeug:127.0.0.1 - - [16/Mar/2024 22:17:12] "[31m[1mGET /photos HTTP/1.1[0m" 405 -
+ERROR:root:2024-03-16 22:18:14 - An error occurred: 415 Unsupported Media Type: Did not attempt to load JSON data because the request Content-Type was not 'application/json'.
+INFO:werkzeug:127.0.0.1 - - [16/Mar/2024 22:18:14] "[35m[1mGET /query HTTP/1.1[0m" 500 -
+ERROR:root:2024-03-16 22:20:00 - An error occurred: 400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)
+INFO:werkzeug:127.0.0.1 - - [16/Mar/2024 22:20:00] "[35m[1mGET /query HTTP/1.1[0m" 500 -
+ERROR:root:2024-03-16 22:24:18 - An error occurred: 400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)
+INFO:werkzeug:127.0.0.1 - - [16/Mar/2024 22:24:18] "[35m[1mGET /query HTTP/1.1[0m" 500 -
+ERROR:root:2024-03-16 22:25:15 - An error occurred: 400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)
+INFO:werkzeug:127.0.0.1 - - [16/Mar/2024 22:25:15] "[35m[1mGET /query HTTP/1.1[0m" 500 -
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 102-570-522
+ERROR:root:2024-03-16 22:26:08 - An error occurred: 400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)
+INFO:werkzeug:127.0.0.1 - - [16/Mar/2024 22:26:08] "[35m[1mGET /query HTTP/1.1[0m" 500 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5001
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 102-570-522
+ERROR:root:2024-03-16 22:26:33 - An error occurred: 400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)
+INFO:werkzeug:127.0.0.1 - - [16/Mar/2024 22:26:33] "[35m[1mGET /query HTTP/1.1[0m" 500 -
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 102-570-522
+ERROR:root:2024-03-16 22:27:22 - An error occurred: 400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)
+INFO:werkzeug:127.0.0.1 - - [16/Mar/2024 22:27:22] "[35m[1mGET /query HTTP/1.1[0m" 500 -
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 102-570-522
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 102-570-522
+INFO:werkzeug:127.0.0.1 - - [16/Mar/2024 22:31:10] "[31m[1mGET /query HTTP/1.1[0m" 405 -
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (inotify)
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5001
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 102-570-522
+ERROR:root:2024-03-16 22:32:07 - An error occurred: 400 Bad Request: Failed to decode JSON object: Expecting value: line 1 column 1 (char 0)
+INFO:werkzeug:127.0.0.1 - - [16/Mar/2024 22:32:07] "[35m[1mPOST /query HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [16/Mar/2024 22:48:43] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Mar/2024 22:48:59] "POST /query HTTP/1.1" 200 -

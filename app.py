@@ -56,7 +56,7 @@ def extract_ids(hits):
     return ids
 
 
-@app.route("/query", methods=["GET"])
+@app.route("/query", methods=["POST"])
 def retrieve_photo():
     try:
         data = request.get_json()
