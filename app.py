@@ -34,10 +34,10 @@ def upload_photos():
             image_array = np.array(image)
             image_emb = encode_images(image_array)
             image_emb = image_emb.flatten().astype(float)
-            image_id = milvus_connection.insert_image_data(
+            vector_id = milvus_connection.insert_image_data(
                 user_id, file_name, image_emb
             )
-            return {"success": "true", "image_id": image_id}
+            return {"success": "true", "vector_id": vector_id}
 
         elif request.method == "DELETE":
             image_id = request.args.get("image_id")
@@ -85,4 +85,4 @@ def delete_schema():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(port=5001, debug=True)
