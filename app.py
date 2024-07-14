@@ -51,8 +51,9 @@ def upload_photos():
 
 def extract_ids(hits):
     ids = []
-    for hit in hits[0]:
-        ids.append(hit.id)
+    for hit in hits:
+        ids.append(hit.get('id'))
+    
     return ids
 
 

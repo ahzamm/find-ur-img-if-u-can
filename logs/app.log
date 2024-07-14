@@ -153,3 +153,306 @@ ERROR:root:2024-03-16 22:32:07 - An error occurred: 400 Bad Request: Failed to d
 INFO:werkzeug:127.0.0.1 - - [16/Mar/2024 22:32:07] "[35m[1mPOST /query HTTP/1.1[0m" 500 -
 INFO:werkzeug:127.0.0.1 - - [16/Mar/2024 22:48:43] "POST /query HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [16/Mar/2024 22:48:59] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5001
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 571-935-028
+INFO:werkzeug:127.0.0.1 - - [19/Mar/2024 15:59:59] "POST /photos HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5001
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 654-931-198
+INFO:werkzeug:127.0.0.1 - - [19/Mar/2024 19:48:59] "DELETE /photos?image_id=b640d608 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Mar/2024 20:02:03] "POST /photos HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Mar/2024 20:02:23] "POST /photos HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Mar/2024 20:02:38] "POST /photos HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Mar/2024 20:02:53] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Mar/2024 20:03:07] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Mar/2024 20:03:18] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Mar/2024 20:03:50] "POST /photos HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Mar/2024 20:09:23] "DELETE /photos?image_id=29ed7a4e HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Mar/2024 20:09:26] "DELETE /photos?image_id=71600e75 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Mar/2024 20:09:28] "DELETE /photos?image_id=c3167fa4 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Mar/2024 20:12:13] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Mar/2024 20:13:06] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Mar/2024 20:13:37] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Mar/2024 20:14:14] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Mar/2024 20:14:53] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Mar/2024 20:15:20] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [19/Mar/2024 20:15:43] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5001
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 779-732-602
+INFO:werkzeug:127.0.0.1 - - [22/Mar/2024 00:57:14] "[31m[1mGET /query HTTP/1.1[0m" 405 -
+INFO:werkzeug:127.0.0.1 - - [22/Mar/2024 00:57:35] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5001
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 655-357-737
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 09:55:58] "POST /photos HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 09:56:24] "POST /photos HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 09:56:43] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [27/May/2024 09:56:54] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5001
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 141-885-110
+INFO:werkzeug:127.0.0.1 - - [28/May/2024 13:06:46] "DELETE /photos?image_id=2246ecfd HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5001
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5001
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 919-318-784
+INFO:werkzeug:127.0.0.1 - - [03/Jun/2024 01:19:00] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [03/Jun/2024 01:19:24] "DELETE /photos?image_id=AEBR3hARMecykeFzdW2mpLrY26SE8lADipCEKVHd0O6IjpsqWEBbORj2JCjI-ZowQnHFHTTgsxH3T9Pe1zjJ3GWhhpNaKnQBaQ HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [03/Jun/2024 01:19:26] "DELETE /photos?image_id=AEBR3hARMecykeFzdW2mpLrY26SE8lADipCEKVHd0O6IjpsqWEBbORj2JCjI-ZowQnHFHTTgsxH3T9Pe1zjJ3GWhhpNaKnQBaQ HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [03/Jun/2024 01:19:27] "DELETE /photos?image_id=AEBR3hARMecykeFzdW2mpLrY26SE8lADipCEKVHd0O6IjpsqWEBbORj2JCjI-ZowQnHFHTTgsxH3T9Pe1zjJ3GWhhpNaKnQBaQ HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [03/Jun/2024 01:19:27] "DELETE /photos?image_id=AEBR3hARMecykeFzdW2mpLrY26SE8lADipCEKVHd0O6IjpsqWEBbORj2JCjI-ZowQnHFHTTgsxH3T9Pe1zjJ3GWhhpNaKnQBaQ HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [03/Jun/2024 01:29:33] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [03/Jun/2024 01:30:11] "POST /photos HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [03/Jun/2024 01:31:38] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5001
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 440-605-556
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5001
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 574-084-970
+INFO:werkzeug:127.0.0.1 - - [07/Jul/2024 20:19:44] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jul/2024 20:20:43] "DELETE /photos?image_id=AEBR3hBdgPc7OdIh2JhohTAqnvOiTU8Y6_H4apzhWPk5wPfg5zqTFDFymA7VBz27Eb19rdhFajHrd9jAFwC-wu5kC9haaKAIdA HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jul/2024 20:20:46] "DELETE /photos?image_id=AEBR3hBdgPc7OdIh2JhohTAqnvOiTU8Y6_H4apzhWPk5wPfg5zqTFDFymA7VBz27Eb19rdhFajHrd9jAFwC-wu5kC9haaKAIdA HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jul/2024 20:20:47] "DELETE /photos?image_id=AEBR3hBdgPc7OdIh2JhohTAqnvOiTU8Y6_H4apzhWPk5wPfg5zqTFDFymA7VBz27Eb19rdhFajHrd9jAFwC-wu5kC9haaKAIdA HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jul/2024 20:20:47] "DELETE /photos?image_id=AEBR3hBdgPc7OdIh2JhohTAqnvOiTU8Y6_H4apzhWPk5wPfg5zqTFDFymA7VBz27Eb19rdhFajHrd9jAFwC-wu5kC9haaKAIdA HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jul/2024 20:20:48] "DELETE /photos?image_id=AEBR3hBdgPc7OdIh2JhohTAqnvOiTU8Y6_H4apzhWPk5wPfg5zqTFDFymA7VBz27Eb19rdhFajHrd9jAFwC-wu5kC9haaKAIdA HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jul/2024 20:20:48] "DELETE /photos?image_id=AEBR3hBdgPc7OdIh2JhohTAqnvOiTU8Y6_H4apzhWPk5wPfg5zqTFDFymA7VBz27Eb19rdhFajHrd9jAFwC-wu5kC9haaKAIdA HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jul/2024 20:21:38] "DELETE /photos?image_id=AEBR3hBdgPc7OdIh2JhohTAqnvOiTU8Y6_H4apzhWPk5wPfg5zqTFDFymA7VBz27Eb19rdhFajHrd9jAFwC-wu5kC9haaKAIdA HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jul/2024 20:22:29] "POST /photos HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jul/2024 20:22:56] "DELETE /photos?image_id=5026e2dc HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jul/2024 20:23:14] "DELETE /photos?image_id=AEBR3hBdgPc7OdIh2JhohTAqnvOiTU8Y6_H4apzhWPk5wPfg5zqTFDFymA7VBz27Eb19rdhFajHrd9jAFwC-wu5kC9haaKAIdA HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jul/2024 20:29:45] "POST /query HTTP/1.1" 200 -
+ERROR:pymilvus.decorators:RPC error: [__internal_register], <MilvusException: (code=1, message=proxy not healthy)>, <Time:{'RPC start': '2024-07-07 23:09:06.391634', 'RPC error': '2024-07-07 23:09:06.397844'}>
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5001
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 363-033-183
+INFO:werkzeug:127.0.0.1 - - [07/Jul/2024 23:09:51] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jul/2024 23:22:55] "DELETE /photos?image_id=cad6f015 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jul/2024 23:23:41] "DELETE /photos?image_id=AEBR3hBpobvz7sxX7DPpf7Rdesqf81d677g456I9n1HQgiUPsCnzMXoZUAh0gQQBaJIKJIsbEgOTVvLF90YSzIJyUL66yCRY7Q HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jul/2024 23:24:51] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5001
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 841-575-478
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 12:14:31] "DELETE /photos?image_id=AEBR3hA7VkUbfdIfTiR9cF43_27OA3QFJrsbaBb9qcSe2ADQe8CniELm6Y6vkhuv2t4QR17X6XEKZFkUdIZQSH5sfmNrhxY6Rg HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 12:19:54] "DELETE /photos?image_id=AEBR3hA7VkUbfdIfTiR9cF43_27OA3QFJrsbaBb9qcSe2ADQe8CniELm6Y6vkhuv2t4QR17X6XEKZFkUdIZQSH5sfmNrhxY6Rg HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 12:25:45] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 13:08:58] "DELETE /photos?image_id=AEBR3hCJ5qpKFh-HpVido8G8h1wSFbLVzfqQUZAiI-w_AYAmlOaX0OyvqbM0BgC0eOSnr_xZS_DmGLBQAItgfAd_fxBZYWA54g HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 13:09:26] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 13:09:39] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 13:10:53] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 13:13:25] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 13:13:54] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 13:17:07] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 13:28:35] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 13:33:58] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 13:37:32] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 13:39:09] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 13:40:15] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 13:42:08] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 13:45:10] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 13:45:54] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 13:46:25] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 13:59:08] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 13:59:19] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 13:59:39] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 14:00:09] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 14:07:31] "POST /photos HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 14:11:44] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 14:12:12] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 14:12:26] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 14:12:41] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 14:13:27] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/milvus.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/milvus.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/milvus.py', reloading
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 841-575-478
+ERROR:root:2024-07-14 14:22:58 - An error occurred: list index out of range
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 14:22:58] "[35m[1mPOST /query HTTP/1.1[0m" 500 -
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/milvus.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/milvus.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/milvus.py', reloading
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 841-575-478
+ERROR:root:2024-07-14 14:24:51 - An error occurred: list index out of range
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 14:24:51] "[35m[1mPOST /query HTTP/1.1[0m" 500 -
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/milvus.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/milvus.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/milvus.py', reloading
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 841-575-478
+ERROR:root:2024-07-14 14:26:41 - An error occurred: list index out of range
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 14:26:41] "[35m[1mPOST /query HTTP/1.1[0m" 500 -
+ERROR:root:2024-07-14 14:45:25 - An error occurred: list index out of range
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 14:45:25] "[35m[1mPOST /query HTTP/1.1[0m" 500 -
+ERROR:root:2024-07-14 14:47:17 - An error occurred: list index out of range
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 14:47:17] "[35m[1mPOST /query HTTP/1.1[0m" 500 -
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/milvus.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/milvus.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/milvus.py', reloading
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 841-575-478
+ERROR:root:2024-07-14 14:48:22 - An error occurred: list index out of range
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 14:48:22] "[35m[1mPOST /query HTTP/1.1[0m" 500 -
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/milvus.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/milvus.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/milvus.py', reloading
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 841-575-478
+ERROR:root:2024-07-14 14:49:24 - An error occurred: list index out of range
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 14:49:24] "[35m[1mPOST /query HTTP/1.1[0m" 500 -
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/milvus.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/milvus.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/milvus.py', reloading
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 841-575-478
+ERROR:root:2024-07-14 14:51:17 - An error occurred: 'str' object has no attribute 'id'
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 14:51:17] "[35m[1mPOST /query HTTP/1.1[0m" 500 -
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/milvus.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/milvus.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/milvus.py', reloading
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 841-575-478
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 841-575-478
+ERROR:root:2024-07-14 14:53:19 - An error occurred: 'str' object has no attribute 'id'
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 14:53:19] "[35m[1mPOST /query HTTP/1.1[0m" 500 -
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 841-575-478
+ERROR:root:2024-07-14 14:55:47 - An error occurred: 'str' object has no attribute 'id'
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 14:55:47] "[35m[1mPOST /query HTTP/1.1[0m" 500 -
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 841-575-478
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 841-575-478
+ERROR:root:2024-07-14 14:56:47 - An error occurred: 'str' object has no attribute 'id'
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 14:56:47] "[35m[1mPOST /query HTTP/1.1[0m" 500 -
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/milvus.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/milvus.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/milvus.py', reloading
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 841-575-478
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 841-575-478
+ERROR:root:2024-07-14 14:57:22 - An error occurred: 'str' object has no attribute 'id'
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 14:57:22] "[35m[1mPOST /query HTTP/1.1[0m" 500 -
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 841-575-478
+ERROR:root:2024-07-14 14:58:08 - An error occurred: 'str' object has no attribute 'id'
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 14:58:08] "[35m[1mPOST /query HTTP/1.1[0m" 500 -
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 841-575-478
+ERROR:root:2024-07-14 15:02:33 - An error occurred: 'dict' object has no attribute 'id'
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 15:02:33] "[35m[1mPOST /query HTTP/1.1[0m" 500 -
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 841-575-478
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 15:03:24] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 15:03:47] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 15:04:02] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 15:05:01] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 15:05:49] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 15:14:31] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 15:15:13] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 15:16:08] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 15:16:54] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 15:17:04] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 841-575-478
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/app.py', reloading
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 841-575-478
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/milvus.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/milvus.py', reloading
+INFO:werkzeug: * Detected change in '/home/ahzam/Downloads/FYP/CUDA-test/milvus.py', reloading
+INFO:werkzeug: * Restarting with watchdog (inotify)
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 841-575-478
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 15:18:46] "POST /query HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jul/2024 15:19:29] "POST /query HTTP/1.1" 200 -

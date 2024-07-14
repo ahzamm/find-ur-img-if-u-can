@@ -1,0 +1,123 @@
+Connected to milvus server...
+ * Serving Flask app 'app.py'
+ * Debug mode: off
+Connected to milvus server...
+ * Serving Flask app 'app.py'
+ * Debug mode: off
+Connected to milvus server...
+ * Serving Flask app 'app.py'
+ * Debug mode: off
+Traceback (most recent call last):
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/bin/flask", line 8, in <module>
+    sys.exit(main())
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/flask/cli.py", line 1064, in main
+    cli.main()
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/click/core.py", line 1078, in main
+    rv = self.invoke(ctx)
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/click/core.py", line 1688, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/click/core.py", line 1434, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/click/core.py", line 783, in invoke
+    return __callback(*args, **kwargs)
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/click/decorators.py", line 92, in new_func
+    return ctx.invoke(f, obj, *args, **kwargs)
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/click/core.py", line 783, in invoke
+    return __callback(*args, **kwargs)
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/flask/cli.py", line 912, in run_command
+    raise e from None
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/flask/cli.py", line 898, in run_command
+    app = info.load_app()
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/flask/cli.py", line 309, in load_app
+    app = locate_app(import_name, name)
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/flask/cli.py", line 219, in locate_app
+    __import__(module_name)
+  File "/home/ahzam/Downloads/FYP/CUDA-test/app.py", line 16, in <module>
+    milvus_connection = MilvusConnection("image_embeddings")
+  File "/home/ahzam/Downloads/FYP/CUDA-test/milvus.py", line 16, in __init__
+    self.connect()
+  File "/home/ahzam/Downloads/FYP/CUDA-test/milvus.py", line 22, in connect
+    connections.connect(alias="default", host="localhost", port="19530")
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/pymilvus/orm/connections.py", line 355, in connect
+    connect_milvus(**kwargs, user=user, password=password, token=token, db_name=db_name)
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/pymilvus/orm/connections.py", line 302, in connect_milvus
+    gh._wait_for_channel_ready(timeout=timeout)
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/pymilvus/client/grpc_handler.py", line 134, in _wait_for_channel_ready
+    raise MilvusException(
+pymilvus.exceptions.MilvusException: <MilvusException: (code=2, message=Fail connecting to server on localhost:19530. Timeout)>
+Traceback (most recent call last):
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/bin/flask", line 8, in <module>
+    sys.exit(main())
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/flask/cli.py", line 1064, in main
+    cli.main()
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/click/core.py", line 1078, in main
+    rv = self.invoke(ctx)
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/click/core.py", line 1688, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/click/core.py", line 1434, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/click/core.py", line 783, in invoke
+    return __callback(*args, **kwargs)
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/click/decorators.py", line 92, in new_func
+    return ctx.invoke(f, obj, *args, **kwargs)
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/click/core.py", line 783, in invoke
+    return __callback(*args, **kwargs)
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/flask/cli.py", line 912, in run_command
+    raise e from None
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/flask/cli.py", line 898, in run_command
+    app = info.load_app()
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/flask/cli.py", line 309, in load_app
+    app = locate_app(import_name, name)
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/flask/cli.py", line 219, in locate_app
+    __import__(module_name)
+  File "/home/ahzam/Downloads/FYP/CUDA-test/app.py", line 16, in <module>
+    milvus_connection = MilvusConnection("image_embeddings")
+  File "/home/ahzam/Downloads/FYP/CUDA-test/milvus.py", line 16, in __init__
+    self.connect()
+  File "/home/ahzam/Downloads/FYP/CUDA-test/milvus.py", line 22, in connect
+    connections.connect(alias="default", host="localhost", port="19530")
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/pymilvus/orm/connections.py", line 355, in connect
+    connect_milvus(**kwargs, user=user, password=password, token=token, db_name=db_name)
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/pymilvus/orm/connections.py", line 302, in connect_milvus
+    gh._wait_for_channel_ready(timeout=timeout)
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/pymilvus/client/grpc_handler.py", line 134, in _wait_for_channel_ready
+    raise MilvusException(
+pymilvus.exceptions.MilvusException: <MilvusException: (code=2, message=Fail connecting to server on localhost:19530. Timeout)>
+Traceback (most recent call last):
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/bin/flask", line 8, in <module>
+    sys.exit(main())
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/flask/cli.py", line 1064, in main
+    cli.main()
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/click/core.py", line 1078, in main
+    rv = self.invoke(ctx)
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/click/core.py", line 1688, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/click/core.py", line 1434, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/click/core.py", line 783, in invoke
+    return __callback(*args, **kwargs)
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/click/decorators.py", line 92, in new_func
+    return ctx.invoke(f, obj, *args, **kwargs)
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/click/core.py", line 783, in invoke
+    return __callback(*args, **kwargs)
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/flask/cli.py", line 912, in run_command
+    raise e from None
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/flask/cli.py", line 898, in run_command
+    app = info.load_app()
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/flask/cli.py", line 309, in load_app
+    app = locate_app(import_name, name)
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/flask/cli.py", line 219, in locate_app
+    __import__(module_name)
+  File "/home/ahzam/Downloads/FYP/CUDA-test/app.py", line 16, in <module>
+    milvus_connection = MilvusConnection("image_embeddings")
+  File "/home/ahzam/Downloads/FYP/CUDA-test/milvus.py", line 16, in __init__
+    self.connect()
+  File "/home/ahzam/Downloads/FYP/CUDA-test/milvus.py", line 22, in connect
+    connections.connect(alias="default", host="localhost", port="19530")
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/pymilvus/orm/connections.py", line 355, in connect
+    connect_milvus(**kwargs, user=user, password=password, token=token, db_name=db_name)
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/pymilvus/orm/connections.py", line 302, in connect_milvus
+    gh._wait_for_channel_ready(timeout=timeout)
+  File "/home/ahzam/Downloads/FYP/CUDA-test/.venv/lib/python3.10/site-packages/pymilvus/client/grpc_handler.py", line 134, in _wait_for_channel_ready
+    raise MilvusException(
+pymilvus.exceptions.MilvusException: <MilvusException: (code=2, message=Fail connecting to server on localhost:19530. Timeout)>

@@ -71,11 +71,25 @@ class MilvusConnection:
         short_id = uuid_str[:length]
         return short_id
 
-    def search(self, user_id, query_embd, top_k=5):
-        search_params = {"metric_type": "L2", "params": {"nprobe": 1}}
+    def search(self, user_id, query_embd, similarity_threshold=0.4, top_k=100):
+        search_params = {"metric_type": "L2", "params": {"nprobe": 10}}
         query_embd = query_embd.astype(float)
         expr = f"user_id == '{user_id}'"
+        
         results = self.collection.search(
             query_embd, "image_embeddings", search_params, top_k, expr
         )
-        return results
+        
+        filtered_results = []
+        for result in results:
+            for hit in result:
+                # Convert L2 distance to similarity score
+                similarity = 1 / (1 + hit.distance)
+                if similarity > similarity_threshold:
+                    filtered_results.append({
+                        'id': hit.id,
+                        'distance': hit.distance,
+                        'similarity': similarity
+                    })
+        
+        return filtered_results
