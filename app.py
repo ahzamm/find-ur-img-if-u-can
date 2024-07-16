@@ -1,6 +1,5 @@
-import logging
 from datetime import datetime
-
+import sys
 import numpy as np
 from flask import Flask, request
 from PIL import Image
@@ -8,19 +7,10 @@ from PIL import Image
 from milvus import MilvusConnection
 from clip import encode_images, encode_text
 
-
 app = Flask(__name__)
 
-logging.basicConfig(filename="logs/app.log", level=logging.ERROR)
 
 milvus_connection = MilvusConnection("image_embeddings")
-
-
-def log_error(exception):
-    current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    error_message = f"{current_time} - An error occurred: {exception}"
-    logging.error(error_message)
-    print(error_message)
 
 
 @app.route("/photos", methods=["POST", "DELETE"])
@@ -29,13 +19,14 @@ def upload_photos():
         if request.method == "POST":
             user_id = request.form["user_id"]
             file = request.files["image"]
+            pk_id = request.form["vector_id"]
             file_name = file.filename
             image = Image.open(file)
             image_array = np.array(image)
             image_emb = encode_images(image_array)
             image_emb = image_emb.flatten().astype(float)
             vector_id = milvus_connection.insert_image_data(
-                user_id, file_name, image_emb
+                user_id, file_name, image_emb, pk_id
             )
             return {"success": "true", "vector_id": vector_id}
 
@@ -45,15 +36,13 @@ def upload_photos():
             return {"success": "true", "message": "File deleted successfully!"}
 
     except Exception as e:
-        log_error(e)
         return {"success": "false", "error": str(e)}, 500
 
 
 def extract_ids(hits):
     ids = []
     for hit in hits:
-        ids.append(hit.get('id'))
-    
+        ids.append(hit.get("id"))
     return ids
 
 
@@ -71,7 +60,6 @@ def retrieve_photo():
         return {"success": "true", "image_ids": ids}
 
     except Exception as e:
-        log_error(e)
         return {"success": "false", "error": str(e)}, 500
 
 
@@ -81,8 +69,29 @@ def delete_schema():
         milvus_connection.delete_schema()
         return {"success": "true", "message": "Schema deleted successfully"}
     except Exception as e:
-        log_error(e)
         return {"success": "false", "message": str(e)}, 500
+
+@app.route("/create-schema", methods=["GET"])
+def create_schema():
+    try:
+        # milvus_connection.delete_schema()
+        milvus_connection.create_collection()
+        return {"success": "true", "message": "Schema created successfully"}
+    except Exception as e:
+        return {"success": "false", "message": str(e)}, 500
+
+
+@app.route("/check-vector", methods=["GET"])
+def check_ids():
+    try:
+        vector_id = request.args.get("vector_id")
+        if not vector_id:
+            return {"success": "false", "error": "vector_id is required"}, 400
+
+        exists = milvus_connection.checkVectorId(vector_id)
+        return {"success": "true", "exists": exists}
+    except Exception as e:
+        return {"success": "false", "error": str(e)}, 500
 
 
 if __name__ == "__main__":

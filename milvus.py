@@ -8,6 +8,7 @@ from pymilvus import (
     connections,
     utility,
 )
+from sympy import false
 
 
 class MilvusConnection:
@@ -25,7 +26,7 @@ class MilvusConnection:
     def create_schema(self):
         fields = [
             FieldSchema(
-                name="pk", dtype=DataType.VARCHAR, max_length=8, is_primary=True
+                name="pk", dtype=DataType.VARCHAR, max_length=200, is_primary=True
             ),
             FieldSchema(name="user_id", dtype=DataType.VARCHAR, max_length=8),
             FieldSchema(name="image_name", dtype=DataType.VARCHAR, max_length=20),
@@ -50,8 +51,12 @@ class MilvusConnection:
         }
         self.collection.create_index("image_embeddings", index)
 
-    def insert_image_data(self, user_id, image_name, image_emb):
-        data = [[self.generate_id()], [user_id], [image_name], [image_emb]]
+    def insert_image_data(self, user_id, image_name, image_emb, pk_id):
+        print("🚀  milvus.py:54 pk_id:", pk_id)
+        if pk_id is not None:
+            data = [[pk_id], [user_id], [image_name], [image_emb]]
+        else:
+            data = [[self.generate_id()], [user_id], [image_name], [image_emb]]
         result = self.collection.insert(data)
         self.collection.flush()
         self.collection.load()
@@ -71,25 +76,40 @@ class MilvusConnection:
         short_id = uuid_str[:length]
         return short_id
 
+    def checkVectorId(self, id):
+        expr = f"pk == '{id}'"
+        results = self.collection.query(expr)
+        return len(results) > 0
+
     def search(self, user_id, query_embd, similarity_threshold=0.4, top_k=100):
+        try:
+            self.collection.load()
+        except Exception as e:
+            return []
+
         search_params = {"metric_type": "L2", "params": {"nprobe": 10}}
         query_embd = query_embd.astype(float)
         expr = f"user_id == '{user_id}'"
-        
-        results = self.collection.search(
-            query_embd, "image_embeddings", search_params, top_k, expr
-        )
-        
+
+        try:
+            results = self.collection.search(
+                query_embd, "image_embeddings", search_params, top_k, expr
+            )
+        except Exception as e:
+            return []
+
         filtered_results = []
         for result in results:
             for hit in result:
                 # Convert L2 distance to similarity score
                 similarity = 1 / (1 + hit.distance)
                 if similarity > similarity_threshold:
-                    filtered_results.append({
-                        'id': hit.id,
-                        'distance': hit.distance,
-                        'similarity': similarity
-                    })
-        
+                    filtered_results.append(
+                        {
+                            "id": hit.id,
+                            "distance": hit.distance,
+                            "similarity": similarity,
+                        }
+                    )
+
         return filtered_results
