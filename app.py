@@ -74,7 +74,6 @@ def delete_schema():
 @app.route("/create-schema", methods=["GET"])
 def create_schema():
     try:
-        # milvus_connection.delete_schema()
         milvus_connection.create_collection()
         return {"success": "true", "message": "Schema created successfully"}
     except Exception as e:

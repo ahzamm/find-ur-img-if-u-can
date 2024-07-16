@@ -52,7 +52,6 @@ class MilvusConnection:
         self.collection.create_index("image_embeddings", index)
 
     def insert_image_data(self, user_id, image_name, image_emb, pk_id):
-        print("🚀  milvus.py:54 pk_id:", pk_id)
         if pk_id is not None:
             data = [[pk_id], [user_id], [image_name], [image_emb]]
         else:
