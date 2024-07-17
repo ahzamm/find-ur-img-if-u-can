@@ -19,7 +19,10 @@ def upload_photos():
         if request.method == "POST":
             user_id = request.form["user_id"]
             file = request.files["image"]
-            pk_id = request.form["vector_id"]
+            try:
+                pk_id = request.form["vector_id"]
+            except:
+                pk_id = None
             file_name = file.filename
             image = Image.open(file)
             image_array = np.array(image)
