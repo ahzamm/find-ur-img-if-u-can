@@ -112,3 +112,9 @@ class MilvusConnection:
                     )
 
         return filtered_results
+
+    def get_all_photos(self, user_id):
+        expr = f"user_id == '{user_id}'"
+        results = self.collection.query(expr)
+        photos = [{"vector_id": result["pk"]} for result in results]
+        return photos

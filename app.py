@@ -94,6 +94,20 @@ def check_ids():
         return {"success": "true", "exists": exists}
     except Exception as e:
         return {"success": "false", "error": str(e)}, 500
+    
+
+@app.route("/retrieve-all-photos/", methods=["GET"])
+def retrieve_all_photos():
+    try:
+        user_id = request.args.get("user_id")
+        if not user_id:
+            return {"success": "false", "error": "user_id is required"}, 400
+        
+        photos = milvus_connection.get_all_photos(user_id)
+        return {"success": "true", "photos": photos}
+    except Exception as e:
+        return {"success": "false", "error": str(e)}, 500
+
 
 
 if __name__ == "__main__":
