@@ -103,10 +103,27 @@ def retrieve_all_photos():
         if not user_id:
             return {"success": "false", "error": "user_id is required"}, 400
         
+        # Fetch all photos associated with the user
         photos = milvus_connection.get_all_photos(user_id)
         return {"success": "true", "photos": photos}
     except Exception as e:
         return {"success": "false", "error": str(e)}, 500
+
+    
+@app.route("/delete-user-data", methods=["DELETE"])
+def delete_user_data():
+    try:
+        user_id = request.args.get("user_id")
+        if not user_id:
+            return {"success": "false", "error": "user_id is required"}, 400
+        
+        # Call the function to delete user vectors
+        milvus_connection.delete_user_vectors(user_id)
+        return {"success": "true", "message": "All user vectors deleted successfully"}
+    except Exception as e:
+        print(f"Error deleting user data: {str(e)}")
+        return {"success": "false", "message": str(e)}, 500
+
 
 
 
